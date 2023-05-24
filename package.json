@@ -1,0 +1,38 @@
+{
+  "name": "wp-todo-list",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "build:css": "postcss css/src/style.css -o css/style.css",
+    "watch:css": "postcss css/src/style.css -o css/style.css -w"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.14",
+    "axios": "^1.4.0",
+    "cssnano": "^6.0.1",
+    "postcss": "^8.4.23",
+    "postcss-cli": "^10.1.0",
+    "postcss-import": "^15.1.0",
+    "postcss-nested": "^6.0.1",
+    "postcss-preset-env": "^8.4.1"
+  },
+  "devDependencies": {
+    "vite": "^4.3.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

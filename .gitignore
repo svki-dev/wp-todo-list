@@ -1,0 +1,32 @@
+# Node.js
+node_modules/
+
+# Build-Verzeichnis
+dist/
+build/
+
+# Lokale Entwicklungsumgebungen
+.env
+
+# Editor-spezifische Dateien
+.vscode/
+.idea/
+
+# macOS-spezifische Dateien
+.DS_Store
+
+# Log-Dateien
+*.log
+
+# NPM-Protokolldateien
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Cache-Verzeichnisse
+.cache/
+.tmp/
+
+# Kompilierte Dateien
+*.min.js
+*.min.css

@@ -1,0 +1,119 @@
+.todo-container {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.todo-container h2 {
+        padding-left: 1rem;
+    }
+
+.todo-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+}
+
+.pending-todo-wrapper,
+.closed-todo-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 50%;
+}
+
+.pending-todo-wrapper ul li, .closed-todo-wrapper ul li {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            padding-left: 0.5rem;
+            border: 1px solid rgb(211, 211, 211);
+            border-radius: 20px;
+        }
+
+.pending-todo-wrapper ul li input, .closed-todo-wrapper ul li input {
+                margin: 0 0.5rem 0 0;
+            }
+
+.pending-todo-wrapper ul li span, .closed-todo-wrapper ul li span {
+                font-size: 1rem;
+            }
+
+.pending-todo-wrapper ul li[aria-priority="complete"], .closed-todo-wrapper ul li[aria-priority="complete"] {
+                background-color: rgb(144, 238, 144);
+            }
+
+.pending-todo-wrapper ul li[aria-priority="low"], .closed-todo-wrapper ul li[aria-priority="low"] {
+                background-color: rgb(255, 255, 224);
+            }
+
+.pending-todo-wrapper ul li[aria-priority="medium"], .closed-todo-wrapper ul li[aria-priority="medium"] {
+                background-color: rgb(255, 160, 122);
+            }
+
+.pending-todo-wrapper ul li[aria-priority="high"], .closed-todo-wrapper ul li[aria-priority="high"] {
+                background-color: rgb(240, 128, 128);
+            }
+
+.add-todo-wrapper {
+    width: 49%;
+}
+
+.add-todo-wrapper form {
+        position: relative;
+    }
+
+.add-todo-wrapper form input {
+            width: 100%;
+            height: 50px;
+            border-radius: 20px;
+            border: 1px solid rgb(211, 211, 211);
+            background-color: transparent;
+            font-size: 1rem;
+        }
+
+.closed-todo-list,
+.pending-todo-list {
+    width: 100%;
+}
+
+.todo-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 0 20px 20px 0;
+    background-color: #f0f0f1;
+    border: 1px solid rgb(211, 211, 211);
+    cursor: pointer;
+    transition: all 400ms ease-in-out;
+}
+
+.todo-btn:before {
+        content: "";
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 50% 50%;
+        width: 25px;
+        height: 25px;
+        display: block;
+    }
+
+.todo-btn.delet:hover {
+            background-color: rgb(240, 128, 128);
+        }
+
+.todo-btn.delet::before {
+            background-image: url("../icons/wp-todo-list-trash-icon.svg");
+        }
+
+.todo-btn.add:hover {
+            background-color: rgb(144, 238, 144);
+        }
+
+.todo-btn.add::before {
+            background-image: url("../icons/wp-todo-list-send-icon.svg");
+        }
