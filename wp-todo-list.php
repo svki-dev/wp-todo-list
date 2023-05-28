@@ -24,8 +24,6 @@ class My_Todo_List_Plugin
         add_action('admin_enqueue_scripts', array($this, 'wp_todo_list_styles'), 10);
         // ANCHOR - Add todo list script
         add_action('admin_enqueue_scripts', array($this, 'wp_todo_list_script'));
-        // ANCHOR - Add attributes to script tag
-        add_filter('script_loader_tag', array($this, 'add_type_attribute'), 10, 3);
     }
 
     // ANCHOR - add activationfunctions
@@ -102,24 +100,9 @@ class My_Todo_List_Plugin
     function wp_todo_list_script()
     {
         if (is_admin()) {
-            $manifestUrl = plugin_dir_path(__FILE__) . 'js/manifest.json';
-            $manifest = file_get_contents($manifestUrl);
-            $manifestData = json_decode($manifest, true);
-            $mainScript = $manifestData['main.js']['src'];
-            wp_register_script('todo-list-script', plugin_dir_url(__FILE__) . $mainScript, array('jquery'), null, true);
+            wp_register_script('todo-list-script', plugin_dir_url(__FILE__) . 'js/main.js', array('jquery'), null, true);
             wp_enqueue_script('todo-list-script');
         }
-    }
-
-    function add_type_attribute($tag, $handle, $src)
-    {
-        // if not your script, do nothing and return original $tag
-        if ('todo-list-script' !== $handle) {
-            return $tag;
-        }
-        // change the script tag by adding type="module" and return it.
-        $tag = '<script type="module" src="' . esc_url($src) . '"></script>';
-        return $tag;
     }
 }
 
