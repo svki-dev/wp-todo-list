@@ -40,3 +40,16 @@ function delete_todo_item($todo_id)
         array('id' => $todo_id)
     );
 }
+
+function update_todo_status($todo_id, $todo_status)
+{
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'todos';
+
+    // Aktualisieren Sie den Status des ToDo in der Datenbank basierend auf der ID
+    $wpdb->update(
+        $table_name,
+        array('status' => $todo_status),
+        array('id' => $todo_id)
+    );
+}

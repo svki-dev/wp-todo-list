@@ -21,8 +21,21 @@ function render_todo_page()
 
         // Aktualisieren Sie die Liste der ToDos
         $todos = get_todo_items();
+
+        // Keine Weiterleitung der Seite, da die Aktualisierung asynchron erfolgt
     }
 
+    // Überprüfen, ob das Checkbox-Formular abgeschickt wurde und der Status eines ToDo aktualisiert werden soll
+    if (isset($_POST['update_todo_status'])) {
+        $todo_id = $_POST['todo_id'];
+        $todo_status = $_POST['todo_status'];
+        update_todo_status($todo_id, $todo_status);
+
+        // Aktualisieren Sie die Liste der ToDos
+        $todos = get_todo_items();
+
+        // Keine Weiterleitung der Seite, da die Aktualisierung asynchron erfolgt
+    }
 ?>
 
     <div class="todo-container">
@@ -30,59 +43,61 @@ function render_todo_page()
             <div class="pending-todo-wrapper">
                 <h2>Pending ToDos</h2>
                 <div class="pending-todo-list">
-                    <form method="post" action="">
-                        <ul>
-                            <?php
-                            foreach ($todos as $todo) {
-                                $todo_id = $todo->id;
-                                $todo_text = $todo->todo_text;
-                                $todo_status = $todo->status;
-                                $todo_priority = $todo->priority;
-                                if ($todo_status == 0) {
-                                    $checked_attr = '';
-                            ?>
-                                    <li id="todo_<?php echo $todo_id ?>" aria-priority="<?php echo $todo_priority ?>">
+                    <ul id="pendingTodoList">
+                        <?php
+                        foreach ($todos as $todo) {
+                            $todo_id = $todo->id;
+                            $todo_text = $todo->todo_text;
+                            $todo_status = $todo->status;
+                            $todo_priority = $todo->priority;
+                            if ($todo_status == 0) {
+                                $checked_attr = '';
+                        ?>
+                                <li id="todo_<?php echo $todo_id ?>" aria-priority="<?php echo $todo_priority ?>">
+                                    <form method="post" action="">
                                         <input type="hidden" name="todo_id" value="<?php echo $todo_id ?>">
-                                        <input type="checkbox" name="todo_status" id="todo_<?php echo $todo_id ?>_checkbox" <?php echo $checked_attr ?>>
+                                        <input type="checkbox" name="todo_status" id="todo_<?php echo $todo_id ?>_checkbox" <?php echo $checked_attr ?> onchange="updateTodoStatus(<?php echo $todo_id ?>, this.checked)">
                                         <label for="todo_<?php echo $todo_id ?>_checkbox">
                                             <span><?php echo $todo_text ?></span>
                                         </label>
                                         <button class="todo-btn delet" type="submit" name="delete_todo"></button>
-                                    </li>
-                            <?php
-                                }
+                                    </form>
+                                </li>
+                        <?php
                             }
-                            ?>
-                        </ul>
-                    </form>
+                        }
+                        ?>
+                    </ul>
                 </div>
             </div>
             <div class="closed-todo-wrapper">
                 <h2>Closed Todos</h2>
                 <div class="closed-todo-list">
-                    <form method="post" action="">
-                        <ul> <?php
-                                foreach ($todos as $todo) {
-                                    $todo_id = $todo->id;
-                                    $todo_text = $todo->todo_text;
-                                    $todo_status = $todo->status;
-                                    $todo_priority = $todo->priority;
-                                    if ($todo_status == 1) {
-                                        $checked_attr = 'checked';
-                                ?>
-                                    <li id="todo_<?php echo $todo_id ?>" aria-priority="<?php echo $todo_priority ?>">
+                    <ul id="closedTodoList">
+                        <?php
+                        foreach ($todos as $todo) {
+                            $todo_id = $todo->id;
+                            $todo_text = $todo->todo_text;
+                            $todo_status = $todo->status;
+                            $todo_priority = $todo->priority;
+                            if ($todo_status == 1) {
+                                $checked_attr = 'checked';
+                        ?>
+                                <li id="todo_<?php echo $todo_id ?>" aria-priority="<?php echo $todo_priority ?>">
+                                    <form method="post" action="">
                                         <input type="hidden" name="todo_id" value="<?php echo $todo_id ?>">
-                                        <input type="checkbox" name="todo_status" id="todo_<?php echo $todo_id ?>_checkbox" <?php echo $checked_attr ?>>
+                                        <input type="checkbox" name="todo_status" id="todo_<?php echo $todo_id ?>_checkbox" <?php echo $checked_attr ?> onchange="updateTodoStatus(<?php echo $todo_id ?>, this.checked)">
                                         <label for="todo_<?php echo $todo_id ?>_checkbox">
                                             <span><?php echo $todo_text ?></span>
                                         </label>
                                         <button class="todo-btn delet" type="submit" name="delete_todo"></button>
-                                    </li>
-
-                            <?php }
-                                } ?>
-                        </ul>
-                    </form>
+                                    </form>
+                                </li>
+                        <?php
+                            }
+                        }
+                        ?>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -90,8 +105,8 @@ function render_todo_page()
             <div class="add-todo">
                 <h2>Add Todos</h2>
                 <form id="addTodoForm" method="post" action="">
-                    <input type="text" name="todo_text" id="todoText"> <!-- Hinzufügen des Namens "todo_text" für das Eingabefeld -->
-                    <button class="todo-btn add" type="submit" name="add_todo"></button> <!-- Ändern des Typs in "submit" -->
+                    <input type="text" name="todo_text" id="todoText">
+                    <button class="todo-btn add" type="submit" name="add_todo"></button>
                 </form>
             </div>
         </div>
