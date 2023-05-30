@@ -33,5 +33,3 @@ This plugin is licensed under the [MIT License](https://opensource.org/licenses/
 ---
 
 Thank you for using the WP Todo plugin! If you have any questions or problems, feel free to create an [Issue](https://github.com/dein-benutzername/wp-todo-plugin/issues).
-
-Translated with www.DeepL.com/Translator (free version)
