@@ -35,9 +35,6 @@
             & span {
                 font-size: 1rem;
             }
-            &[aria-priority="complete"] {
-                background-color: rgb(144, 238, 144);
-            }
             &[aria-priority="low"] {
                 background-color: rgb(255, 255, 224);
             }
@@ -62,6 +59,18 @@
             border: 1px solid rgb(211, 211, 211);
             background-color: transparent;
             font-size: 1rem;
+            &[type="checkbox"]:checked {
+                background-color: rgb(144, 238, 144);
+            }
+            &[aria-prio="low"] {
+                background-color: rgb(255, 255, 224);
+            }
+            &[aria-prio="medium"] {
+                background-color: rgb(255, 160, 122);
+            }
+            &[aria-prio="high"] {
+                background-color: rgb(240, 128, 128);
+            }
         }
     }
 }
@@ -70,7 +79,9 @@
 .pending-todo-list {
     width: 100%;
 }
-
+#closedTodoList li {
+    background-color: rgb(144, 238, 144);
+}
 .todo-btn {
     position: absolute;
     top: 0;
@@ -107,5 +118,51 @@
         &::before {
             background-image: url("../icons/wp-todo-list-send-icon.svg");
         }
+    }
+}
+
+.prio-container {
+    width: 100%;
+    border: 1px solid rgb(211, 211, 211);
+    border-radius: 20px;
+    margin-top: 0.5rem;
+    max-height: 0px;
+    overflow: hidden;
+    visibility: hidden;
+    & ul {
+        margin: 0;
+        & li {
+            font-size: 1rem;
+            padding: 13px 0 13px 13px;
+            margin: 0;
+            border-bottom: 1px solid rgb(211, 211, 211);
+            transition: all 550ms ease-in-out;
+            cursor: pointer;
+            &:nth-child(3) {
+                border-bottom: 0;
+            }
+            &.high {
+                border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+                &:hover {
+                    background-color: rgb(240, 128, 128);
+                }
+            }
+            &.medium:hover {
+                background-color: rgb(255, 160, 122);
+            }
+            &.low {
+                border-bottom-left-radius: 20px;
+                border-bottom-right-radius: 20px;
+                &:hover {
+                    background-color: rgb(255, 255, 224);
+                }
+            }
+        }
+    }
+    &.dropdown_active {
+        max-height: unset;
+        overflow: auto;
+        visibility: visible;
     }
 }

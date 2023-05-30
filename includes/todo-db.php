@@ -1,4 +1,8 @@
 <?php
+// Block direct access to the file
+defined('ABSPATH') || exit;
+
+
 // Function to create the database table for the ToDo entries
 function create_todo_table()
 {

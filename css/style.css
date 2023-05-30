@@ -41,10 +41,6 @@
                 font-size: 1rem;
             }
 
-.pending-todo-wrapper ul li[aria-priority="complete"], .closed-todo-wrapper ul li[aria-priority="complete"] {
-                background-color: rgb(144, 238, 144);
-            }
-
 .pending-todo-wrapper ul li[aria-priority="low"], .closed-todo-wrapper ul li[aria-priority="low"] {
                 background-color: rgb(255, 255, 224);
             }
@@ -74,9 +70,29 @@
             font-size: 1rem;
         }
 
+.add-todo-wrapper form input[type="checkbox"]:checked {
+                background-color: rgb(144, 238, 144);
+            }
+
+.add-todo-wrapper form input[aria-prio="low"] {
+                background-color: rgb(255, 255, 224);
+            }
+
+.add-todo-wrapper form input[aria-prio="medium"] {
+                background-color: rgb(255, 160, 122);
+            }
+
+.add-todo-wrapper form input[aria-prio="high"] {
+                background-color: rgb(240, 128, 128);
+            }
+
 .closed-todo-list,
 .pending-todo-list {
     width: 100%;
+}
+
+#closedTodoList li {
+    background-color: rgb(144, 238, 144);
 }
 
 .todo-btn {
@@ -117,3 +133,58 @@
 .todo-btn.add::before {
             background-image: url("../icons/wp-todo-list-send-icon.svg");
         }
+
+.prio-container {
+    width: 100%;
+    border: 1px solid rgb(211, 211, 211);
+    border-radius: 20px;
+    margin-top: 0.5rem;
+    max-height: 0px;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.prio-container ul {
+        margin: 0;
+    }
+
+.prio-container ul li {
+            font-size: 1rem;
+            padding: 13px 0 13px 13px;
+            margin: 0;
+            border-bottom: 1px solid rgb(211, 211, 211);
+            transition: all 550ms ease-in-out;
+            cursor: pointer;
+        }
+
+.prio-container ul li:nth-child(3) {
+                border-bottom: 0;
+            }
+
+.prio-container ul li.high {
+                border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+            }
+
+.prio-container ul li.high:hover {
+                    background-color: rgb(240, 128, 128);
+                }
+
+.prio-container ul li.medium:hover {
+                background-color: rgb(255, 160, 122);
+            }
+
+.prio-container ul li.low {
+                border-bottom-left-radius: 20px;
+                border-bottom-right-radius: 20px;
+            }
+
+.prio-container ul li.low:hover {
+                    background-color: rgb(255, 255, 224);
+                }
+
+.prio-container.dropdown_active {
+        max-height: unset;
+        overflow: auto;
+        visibility: visible;
+    }
