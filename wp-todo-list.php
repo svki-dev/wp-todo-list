@@ -21,7 +21,10 @@ class Plugin
     public function __construct()
     {
         // Register activation hook
-        register_activation_hook(__FILE__, array($this, 'activate'));
+        require_once plugin_dir_path(__FILE__) . 'includes/todo-db.php';
+        register_activation_hook(__FILE__, 'create_todo_table');
+
+
 
         // Add admin page
         add_action('admin_menu', array($this, 'add_admin_page'));
@@ -29,13 +32,6 @@ class Plugin
 
         // Enqueue todo list stylesheet and script
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_assets'));
-    }
-
-    // Activation function
-    public function activate()
-    {
-        // Include necessary files for activation
-        require_once plugin_dir_path(__FILE__) . 'includes/todo-db.php';
     }
 
     // Render function for admin page
